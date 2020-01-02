@@ -110,10 +110,10 @@ def num_points_scored(players_name)
       if attribute == :players
         data.each do |player|
           if player[:player_name] == players_name
-            puts player[:points]
+            return player[:points]
           end 
         end 
       end
     end 
-  end 
+  end
 end 
