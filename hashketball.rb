@@ -3,7 +3,7 @@ require 'pry'
 def game_hash
 	{
 		away: { team_name: "Charlotte Hornets",
-				colors: ["Turqoise", "Purple"],
+				colors: ["Turquoise", "Purple"],
 				players: [
 					{player_name: "Jeff Adrien",
 						number: 4,
@@ -23,7 +23,7 @@ def game_hash
        					steals: 22,
        					blocks: 15,
        					slam_dunks: 10},
-       				{player_name: "Desagna Diop",
+       				{player_name: "DeSagna Diop",
        					number: 2,
        					shoe: 14,
        					points: 24,
@@ -73,7 +73,7 @@ def game_hash
      					steals: 12,
      					blocks: 12,
      					slam_dunks: 7},
-     				{player_name: "Brook Loopez",
+     				{player_name: "Brook Lopez",
      					number: 11,
      					shoe: 17,
      					points: 17,
@@ -117,3 +117,67 @@ def num_points_scored(players_name)
     end 
   end
 end 
+
+def shoe_size(players_name)
+  game_hash.each do |place, team|
+    team.each do |attribute, data|
+      if attribute == :players
+        data.each do |player|
+          if player[:player_name] == players_name
+            return player[:shoe]
+          end 
+        end 
+      end
+    end 
+  end 
+end 
+
+def team_colors(team_name)
+  game_hash.each do |place, team|
+    if team[:team_name] == team_name
+      return team[:colors]
+    end 
+  end 
+end 
+
+def team_names
+  game_hash.map do |place, team|
+    team[:team_name]
+  end 
+end 
+
+def player_numbers(team_name)
+  nums = []
+  game_hash.map do |place, team|
+    if team[:team_name] == team_name
+      team.each do |attributes, data|
+        if attributes == :players
+          data.each do |player|
+            nums << player[:number]
+          end 
+        end 
+      end 
+    end 
+  end 
+  nums
+end 
+
+def player_stats(players_name)
+  new_hash = {}
+  game_hash.each do |place, team|
+    team.each do |attributes, data|
+      if attributes == :players 
+        data.each do |player|
+          if player[:player_name] == players_name
+            new_hash = player.delete_if do |k, v|
+              k == players_name
+            end 
+          end 
+        end 
+      end 
+    end 
+  end 
+  new_hash
+end 
+
+
