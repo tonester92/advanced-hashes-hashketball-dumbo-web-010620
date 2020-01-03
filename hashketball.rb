@@ -28,6 +28,7 @@ def game_hash
        					shoe: 14,
        					points: 24,
        					rebounds: 12,
+       					assists: 12,
        					steals: 4,
        					blocks:5,
       					slam_dunks: 5},
@@ -170,7 +171,7 @@ def player_stats(players_name)
         data.each do |player|
           if player[:player_name] == players_name
             new_hash = player.delete_if do |k, v|
-              k == players_name
+              k == :player_name
             end 
           end 
         end 
@@ -180,4 +181,16 @@ def player_stats(players_name)
   new_hash
 end 
 
+def big_shoe_rebounds
+  game_hash.map do |place, team|
+    team.each do |attributes, data|
+      if attributes == :shoe_size
+        data.each do |player|
+          return player.values.max
+        end 
+      end 
+    end 
+  end 
+end 
 
+          
