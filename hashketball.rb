@@ -194,3 +194,15 @@ def big_shoe_rebounds
   return biggest_shoe_and_rebounds[1]
 end
 
+def most_points_scored
+  most_points_and_name = [0,""]
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player_stats|
+      if player_stats[:points] > most_points_and_name[0]
+        most_points_and_name[0] = player_stats[:points]
+        most_points_and_name[1] = player_stats[:player_name]
+      end
+    end
+  end
+  return most_points_and_name[1]
+end
