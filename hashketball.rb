@@ -219,3 +219,15 @@ def winning_team
   end
   return (team_scores.values[0] > team_scores.values[1]) ? team_scores.keys[0] : team_scores.keys[1]
 end
+
+def player_with_longest_name
+  longest_name = ""
+  game_hash.each do |location, team_data|
+    team_data[:players].each do |player_stats| 
+      if player_stats[:player_name].length > longest_name.length
+        longest_name = player_stats[:player_name]
+      end
+    end
+  end
+  return longest_name
+end
