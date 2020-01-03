@@ -206,3 +206,16 @@ def most_points_scored
   end
   return most_points_and_name[1]
 end
+
+def winning_team
+  team_scores = {} # we will store each team's name and score here
+  game_hash.each do |location, team_data|
+    if !team_scores[:team_name]
+      team_scores[team_data[:team_name]] = 0
+    end
+    team_data[:players].each do |player_stats| 
+      team_scores[team_data[:team_name]] += player_stats[:points]
+    end
+  end
+  return (team_scores.values[0] > team_scores.values[1]) ? team_scores.keys[0] : team_scores.keys[1]
+end
